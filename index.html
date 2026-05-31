@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mădălin Stroe — AI Automation Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1A6B4A;
+  --green-light:#E8F4EE;
+  --green-mid:#2D8A62;
+  --green-dark:#134F38;
+  --ink:#0E1A14;
+  --ink2:#2C3E35;
+  --muted:#5C7268;
+  --faint:#EEF4F1;
+  --border:#D4E8DC;
+  --white:#FFFFFF;
+  --serif:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+  --max:1100px;
+  --r:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--white);color:var(--ink);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:62px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-weight:600;font-size:1rem;color:var(--green);letter-spacing:-.01em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:.9rem;color:var(--muted);font-weight:400;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{
+  font-size:.875rem;font-weight:500;color:var(--white);
+  background:var(--green);border:none;border-radius:6px;
+  padding:.5rem 1.2rem;cursor:pointer;text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:120px 2.5rem 80px;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, #E8F4EE 0%, transparent 70%),
+    var(--white);
+}
+.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.78rem;color:var(--green);
+  background:var(--green-light);border:1px solid var(--border);
+  border-radius:100px;padding:.3rem .9rem;margin-bottom:1.5rem;letter-spacing:.04em;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+h1{font-size:clamp(2.6rem,5vw,4rem);font-weight:300;line-height:1.12;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.4rem}
+h1 em{font-style:normal;color:var(--green);font-weight:500}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:480px;margin-bottom:4rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--green);color:var(--white);text-decoration:none;
+  padding:.85rem 1.8rem;border-radius:8px;font-weight:500;font-size:.95rem;
+  transition:background .2s,transform .15s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--ink2);text-decoration:none;
+  padding:.85rem 1.8rem;border-radius:8px;font-weight:400;font-size:.95rem;
+  border:1px solid var(--border);transition:border-color .2s,transform .15s;
+}
+.btn-secondary:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+
+/* ── HERO CARD ── */
+.hero-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem;
+  position:relative;
+}
+.hero-card::before{
+  content:'Available for projects';
+  position:absolute;top:-14px;left:1.5rem;
+  font-size:.72rem;font-family:var(--mono);letter-spacing:.06em;
+  background:var(--green);color:var(--white);
+  padding:.3rem .8rem;border-radius:100px;
+}
+.profile-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--faint)}
+.avatar{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:600;font-size:1.1rem;color:var(--green);
+  flex-shrink:0;border:2px solid var(--border);
+}
+.profile-name{font-weight:600;font-size:1rem;color:var(--ink)}
+.profile-title{font-size:.82rem;color:var(--muted)}
+.card-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.2rem}
+.stat{background:var(--white);padding:1rem;text-align:center}
+.stat-num{font-size:1.6rem;font-weight:300;color:var(--green);letter-spacing:-.02em;display:block}
+.stat-label{font-size:.72rem;color:var(--muted);letter-spacing:.03em;font-family:var(--mono)}
+.card-tools{display:flex;flex-wrap:wrap;gap:.4rem}
+.tool-pill{
+  font-size:.72rem;font-family:var(--mono);
+  background:var(--faint);color:var(--ink2);
+  border:1px solid var(--border);border-radius:6px;
+  padding:.2rem .6rem;
+}
+
+/* ── SECTIONS ── */
+section{padding:100px 2.5rem}
+.section-inner{max-width:var(--max);margin:0 auto}
+.section-label{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;
+  color:var(--green);text-transform:uppercase;margin-bottom:.6rem;
+}
+.section-title{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;letter-spacing:-.025em;color:var(--ink);margin-bottom:1.2rem;line-height:1.2}
+.section-title strong{font-weight:500;color:var(--green)}
+.section-sub{font-size:1.05rem;color:var(--muted);max-width:580px;line-height:1.7;font-weight:300}
+
+/* ── PROBLEMS ── */
+#problems{background:var(--ink)}
+#problems .section-label{color:#6FCF9A}
+#problems .section-title{color:var(--white)}
+#problems .section-sub{color:#8FA99F}
+.problems-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;
+  margin-top:3rem;
+}
+.problem-item{
+  background:var(--ink);padding:2rem;
+  transition:background .2s;
+}
+.problem-item:hover{background:#16261E}
+.problem-num{
+  font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.25);
+  letter-spacing:.08em;display:block;margin-bottom:.8rem;
+}
+.problem-text{color:rgba(255,255,255,.85);font-size:.97rem;line-height:1.6;font-weight:300}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:3rem}
+.service-card{
+  background:var(--white);border:1px solid var(--border);border-radius:14px;
+  padding:1.8rem;transition:border-color .2s,transform .2s;
+}
+.service-card:hover{border-color:var(--green);transform:translateY(-3px)}
+.service-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--green-light);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;font-size:1.1rem;
+}
+.service-name{font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:.6rem}
+.service-desc{font-size:.88rem;color:var(--muted);line-height:1.65;font-weight:300}
+.service-price{
+  display:inline-block;margin-top:1rem;
+  font-family:var(--mono);font-size:.72rem;color:var(--green);
+  background:var(--green-light);border-radius:4px;padding:.2rem .6rem;
+  letter-spacing:.04em;
+}
+
+/* ── STACK ── */
+#stack{background:var(--faint)}
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:3rem}
+.stack-group{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.4rem}
+.stack-group-name{font-family:var(--mono);font-size:.72rem;color:var(--green);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.8rem}
+.stack-items{display:flex;flex-wrap:wrap;gap:.4rem}
+.stack-item{
+  font-size:.8rem;color:var(--ink2);background:var(--faint);
+  border:1px solid var(--border);border-radius:6px;
+  padding:.25rem .65rem;font-family:var(--mono);
+}
+
+/* ── EXPERIENCE ── */
+.timeline{margin-top:3rem}
+.timeline-item{
+  display:grid;grid-template-columns:200px 1fr;gap:2.5rem;
+  padding:2rem 0;border-top:1px solid var(--border);
+}
+.timeline-item:last-child{border-bottom:1px solid var(--border)}
+.timeline-left{}
+.tl-dates{font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.04em;margin-bottom:.3rem}
+.tl-location{font-size:.8rem;color:var(--muted)}
+.tl-role{font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:.2rem}
+.tl-company{font-size:.88rem;color:var(--green);margin-bottom:.8rem}
+.tl-desc{font-size:.9rem;color:var(--muted);line-height:1.7;font-weight:300}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem}
+.tl-tag{
+  font-size:.72rem;font-family:var(--mono);
+  background:var(--green-light);color:var(--green-dark);
+  border-radius:5px;padding:.2rem .55rem;
+}
+
+/* ── CREDIBILITY ── */
+.cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:2.5rem}
+.cred-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:12px;padding:1.4rem;
+  display:flex;align-items:flex-start;gap:1rem;
+}
+.cred-check{
+  width:32px;height:32px;border-radius:8px;background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.cred-check svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.2;fill:none}
+.cred-text{font-size:.88rem;color:var(--ink2);line-height:1.6;font-weight:300}
+.cred-text strong{font-weight:500;color:var(--ink);display:block;margin-bottom:.2rem}
+
+/* ── CTA ── */
+#contact{background:var(--ink)}
+#contact .section-label{color:#6FCF9A}
+#contact .section-title{color:var(--white)}
+#contact .section-sub{color:#8FA99F;max-width:600px}
+.cta-box{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:3rem;margin-top:3rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;
+}
+.cta-offer h3{font-size:1.5rem;font-weight:300;color:var(--white);letter-spacing:-.02em;margin-bottom:.5rem}
+.cta-offer p{font-size:.95rem;color:#8FA99F;font-weight:300}
+.contact-details{display:flex;flex-direction:column;gap:.6rem}
+.contact-row{display:flex;align-items:center;gap:.7rem;font-size:.9rem;color:#8FA99F}
+.contact-row a{color:#6FCF9A;text-decoration:none;transition:color .2s}
+.contact-row a:hover{color:var(--white)}
+.contact-row svg{width:16px;height:16px;stroke:#6FCF9A;stroke-width:1.8;fill:none;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{
+  padding:2rem 2.5rem;text-align:center;
+  font-size:.8rem;color:var(--muted);
+  border-top:1px solid var(--border);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 1.2rem}
+  .nav-links{display:none}
+  .hero{padding:100px 1.2rem 60px}
+  .hero-inner{grid-template-columns:1fr;gap:2rem}
+  .hero-card{display:block}
+  section{padding:70px 1.2rem}
+  .timeline-item{grid-template-columns:1fr;gap:.8rem}
+  .cta-box{flex-direction:column}
+  .hero-card{margin:0;padding-top:1.4rem}
+}
+
+/* ── SCROLL FADE ── */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Mădălin Stroe</span>
+  <ul class="nav-links">
+    <li><a href="#problems">Problems</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">AI Automation Consultant</div>
+      <h1>Less <em>repetition</em>.<br>More <em>leverage</em>.<br>Build with <em>AI</em>.</h1>
+      <p class="hero-sub">I help small and medium businesses design and implement AI-powered automation workflows - so your team spends time on work that actually matters.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          Book a call
+        </a>
+        <a href="#services" class="btn-secondary">See services →</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="profile-head">
+        <div class="avatar">
+          <img src="/images/1756067314149.jfif" alt="Mădălin Stroe" style="width:150%;height:150%;object-fit:cover;border-radius:50%;">
+        </div>
+        <div>
+          <div class="profile-name">Mădălin Stroe</div>
+          <div class="profile-title">AI Automation Consultant · Brașov, România</div>
+        </div>
+      </div>
+      <div class="card-stats">
+        <div class="stat"><span class="stat-num">12+</span><span class="stat-label">years experience</span></div>
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">domains: QA · ERP · AI</span></div>
+      </div>
+      <div class="card-tools">
+        <span class="tool-pill">n8n</span>
+        <span class="tool-pill">Claude</span>
+        <span class="tool-pill">ChatGPT</span>
+        <span class="tool-pill">Playwright</span>
+        <span class="tool-pill">Python</span>
+        <span class="tool-pill">REST APIs</span>
+        <span class="tool-pill">SQL</span>
+        <span class="tool-pill">Workflow Automation</span>
+        <span class="tool-pill">Prompt Engineering</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-inner">
+    <div class="section-label">Who I work with</div>
+    <h2 class="section-title">Recognise any of these?</h2>
+    <p class="section-sub" style="color:#8FA99F;font-weight:300">These are the most common problems I encounter with growing SMEs.<br>If your business hits more than two, automation is likely overdue.</p>
+    <div class="problems-grid fade-in">
+      <div class="problem-item">
+        <span class="problem-num">01</span>
+        <p class="problem-text">Repetitive manual tasks consuming team hours that could be automated in days</p>
+      </div>
+      <div class="problem-item">
+        <span class="problem-num">02</span>
+        <p class="problem-text">Disconnected tools with no unified data or workflow layer</p>
+      </div>
+      <div class="problem-item">
+        <span class="problem-num">03</span>
+        <p class="problem-text">Everyone's using AI differently, nobody agrees on what's working, and results are invisible</p>
+      </div>
+      <div class="problem-item">
+        <span class="problem-num">04</span>
+        <p class="problem-text">Customer communication and follow-up falling through the cracks</p>
+      </div>
+      <div class="problem-item">
+        <span class="problem-num">05</span>
+        <p class="problem-text">Tech decisions made without quality-minded or systems-level thinking</p>
+      </div>
+      <div class="problem-item">
+        <span class="problem-num">06</span>
+        <p class="problem-text">Internal processes that worked for 5 people but are breaking at 20</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner fade-in">
+    <div class="section-label">What I offer</div>
+    <h2 class="section-title">Four ways to <strong>work together</strong></h2>
+    <p class="section-sub">From a single focused audit to ongoing partnership - structured for a win-win collaboration.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="service-name">AI Workflow Audit & Strategy</div>
+        <div class="service-desc">Map your current processes, identify automation opportunities, and receive a prioritised implementation roadmap - with ROI estimates. Delivered as a written report.</div>
+        <span class="service-price">Discovery → Fixed fee</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="service-name">AI Automation Implementation</div>
+        <div class="service-desc">End-to-end build of n8n or API-based automation workflows, including AI-agent logic, testing, documentation, and handover to your team.</div>
+        <span class="service-price">Project-based</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="1.8"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="service-name">Prompt Engineering & AI Tooling</div>
+        <div class="service-desc">Custom system prompts, AI assistant design, ChatGPT or Claude integration, and structured output for your specific business context.</div>
+        <span class="service-price">Fixed fee or hourly</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A6B4A" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="service-name">Fractional AI Advisor</div>
+        <div class="service-desc">Ongoing strategic guidance, tool selection, team enablement, and implementation oversight - without hiring a full-time head of AI. Monthly retainer.</div>
+        <span class="service-price">Monthly retainer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="section-inner fade-in">
+    <div class="section-label">Tools & technology</div>
+    <h2 class="section-title">The <strong>automation stack</strong></h2>
+    <p class="section-sub">Fluent across the modern AI and automation toolchain - from low-code orchestration to API-level integration and prompt architecture.</p>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <div class="stack-group-name">Orchestration</div>
+        <div class="stack-items">
+          <span class="stack-item">n8n</span>
+          <span class="stack-item">Make</span>
+          <span class="stack-item">Zapier</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-name">AI Models</div>
+        <div class="stack-items">
+          <span class="stack-item">Claude</span>
+          <span class="stack-item">GPT-4 and GPT-5 series</span>
+          <span class="stack-item">Gemini</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-name">Prompt Engineering</div>
+        <div class="stack-items">
+          <span class="stack-item">System prompts</span>
+          <span class="stack-item">Chain-of-Thought management</span>
+          <span class="stack-item">Structured output</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-name">API & Data</div>
+        <div class="stack-items">
+          <span class="stack-item">REST APIs</span>
+          <span class="stack-item">Webhooks</span>
+          <span class="stack-item">Postman</span>
+          <span class="stack-item">Notion</span>
+          <span class="stack-item">Airtable</span>
+          <span class="stack-item">SQL</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-name">Dev & Testing</div>
+        <div class="stack-items">
+          <span class="stack-item">Python</span>
+          <span class="stack-item">Playwright</span>
+          <span class="stack-item">Git</span>
+          <span class="stack-item">Test cases</span>
+          <span class="stack-item">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner fade-in">
+    <div class="section-label">Professional Background</div>
+    <h2 class="section-title">12+ years of <strong>systems thinking</strong></h2>
+    <p class="section-sub">I've been on the consulting side, the product side, and the testing side - which means fewer surprises when things go into the real world.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">2024 - Present</div>
+          <div class="tl-location">Remote</div>
+        </div>
+        <div>
+          <div class="tl-role">Independent AI Consultant</div>
+          <div class="tl-company">Freelance</div>
+          <div class="tl-desc">Designing and deploying AI automation systems for SMBs. Specializing in n8n workflows, LLM integrations, and AI strategy.</div>
+          <div class="tl-tags"><span class="tl-tag">n8n</span><span class="tl-tag">OpenAI</span><span class="tl-tag">Claude</span><span class="tl-tag">AI Agents</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">Oct 2025 - Present</div>
+          <div class="tl-location">Remote</div>
+        </div>
+        <div>
+          <div class="tl-role">QA Automation Engineer</div>
+          <div class="tl-company">Ness Digital Engineering</div>
+          <div class="tl-desc">Architecting end-to-end automation framework and actively integrating AI-assisted tooling and prompting patterns to accelerate defect detection and documentation workflows.</div>
+          <div class="tl-tags"><span class="tl-tag">Playwright MCP</span><span class="tl-tag">Claude code</span><span class="tl-tag">Agile</span><span class="tl-tag">Test architecture</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">Jun 2022 - Sep 2025</div>
+          <div class="tl-location">Remote</div>
+        </div>
+        <div>
+          <div class="tl-role">QA Engineer</div>
+          <div class="tl-company">imobiliare.ro</div>
+          <div class="tl-desc">Ensured quality of web, CRM, and mobile platforms. Designed test scenarios and workflows, and bridged engineering and business stakeholder needs proactively.</div>
+          <div class="tl-tags"><span class="tl-tag">Web & Mobile QA</span><span class="tl-tag">CRM</span><span class="tl-tag">Mentoring</span><span class="tl-tag">Process design</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">May 2020 - May 2022</div>
+          <div class="tl-location">Brașov</div>
+        </div>
+        <div>
+          <div class="tl-role">Founder & Product Builder</div>
+          <div class="tl-company">Independent - Entrepreneurial Career Break</div>
+          <div class="tl-desc">Founded and launched a SaaS product and an affiliate marketing website. Handled product design, web development, SEO, content creation, digital marketing, and early automation tooling.</div>
+          <div class="tl-tags"><span class="tl-tag">SaaS</span><span class="tl-tag">SEO</span><span class="tl-tag">Automation</span><span class="tl-tag">Digital marketing</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">Oct 2015 - May 2020</div>
+          <div class="tl-location">Denmark</div>
+        </div>
+        <div>
+          <div class="tl-role">Software Consultant - ERP</div>
+          <div class="tl-company">Hansen Technologies</div>
+          <div class="tl-desc">Customised and implemented Microsoft Dynamics NAV for telecom clients across Europe. Delivered GDPR-compliant solutions. Operated as trusted technical advisor.</div>
+          <div class="tl-tags"><span class="tl-tag">MS Dynamics NAV</span><span class="tl-tag">GDPR</span><span class="tl-tag">ERP Consulting</span><span class="tl-tag">Telecom</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <div class="tl-dates">Jun 2012 - Aug 2015</div>
+          <div class="tl-location">Brașov</div>
+        </div>
+        <div>
+          <div class="tl-role">Manual Software Tester</div>
+          <div class="tl-company">Synoptix</div>
+          <div class="tl-desc">Created and executed test cases for enterprise telecom solutions. Built solid defect-reporting workflows</div>
+          <div class="tl-tags"><span class="tl-tag">QA</span><span class="tl-tag">Telecom</span><span class="tl-tag">Test design</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials" style="background:var(--faint)">
+  <div class="section-inner fade-in">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Education & <strong>certifications</strong></h2>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>Claude Code in Action</strong>Anthropic · 2026</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>Certificate of completion: Claude 101</strong>Anthropic · 2026</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>AI Prompt Engineering Fundamentals</strong>Udemy · 2024</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>GDPR Compliance Certification</strong>Hansen Technologies · 2018</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>Trusted Advisor Training</strong>trustedadvisor.com · 2016</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>Microsoft Dynamics NAV Development</strong>Microsoft · 2015</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>ISTQB Certified Tester, Foundation Level</strong>ISTQB · 2014</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="cred-text"><strong>B.Sc. Automation Engineering</strong>Transilvania University of Brașov · 2007-2011</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact">
+  <div class="section-inner fade-in">
+    <div class="section-label">Let's talk</div>
+    <h2 class="section-title">Not sure if automation will help?<br>That's exactly what we will find out.</h2>
+    <p class="section-sub">A free 30-minute discovery call to understand your situation and be direct about whether - and where - automation would actually move the needle for your business.</p>
+    <div class="cta-box">
+      <div class="cta-offer">
+        <h3>Free 30-min discovery call</h3>
+        <p>No pitch. No obligation. Just a clear-headed conversation about what's possible.</p>
+      </div>
+      <div class="contact-details">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:madalin.stroe@outlook.com">madalin.stroe@outlook.com</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.01 1.19 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          <a href="tel:+40740909783">(+40) 740 909 783</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.01 1.19 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          <a href="https://www.linkedin.com/in/madalinstroe/" target="_blank">LinkedIn</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Brașov, România · Available globally (remote)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Mădălin Stroe · AI Automation Consultant · Brașov, România</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
