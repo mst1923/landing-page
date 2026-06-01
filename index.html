@@ -76,6 +76,19 @@
   --max:1100px;
   --r:10px;
 }
+[data-theme="dark"]{
+  --green:#5DBF8A;
+  --section-dark:#0D1511;
+  --green-light:#1C2420;
+  --green-mid:#5DBF8A;
+  --green-dark:#90D4AE;
+  --ink:#EDECEA;
+  --ink2:#C4BFB8;
+  --muted:#8A8680;
+  --faint:#1A1816;
+  --border:#2E2B28;
+  --white:#131210;
+}
 html{scroll-behavior:smooth}
 body{font-family:var(--serif);background:var(--white);color:var(--ink);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
 
@@ -105,9 +118,10 @@ nav{
   min-height:100vh;
   display:flex;align-items:center;
   padding:120px 2.5rem 80px;
-  background:
-    radial-gradient(ellipse 60% 50% at 70% 50%, #E8F4EE 0%, transparent 70%),
-    var(--white);
+  /*background:
+  #  radial-gradient(ellipse 60% 50% at 70% 50%, #1daa63 0%, transparent 70%),
+  #  var(--white);
+  */
 }
 .hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .hero-tag{
@@ -185,7 +199,7 @@ section{padding:100px 2.5rem}
 .section-sub{font-size:1.05rem;color:var(--muted);max-width:580px;line-height:1.7;font-weight:300}
 
 /* ── PROBLEMS ── */
-#problems{background:var(--ink)}
+#problems{background:var(--section-dark, var(--ink))}
 #problems .section-label{color:#6FCF9A}
 #problems .section-title{color:var(--white)}
 #problems .section-sub{color:#8FA99F}
@@ -196,7 +210,7 @@ section{padding:100px 2.5rem}
   margin-top:3rem;
 }
 .problem-item{
-  background:var(--ink);padding:2rem;
+  background:var(--section-dark, var(--ink));padding:2rem;
   transition:background .2s;
 }
 .problem-item:hover{background:#16261E}
@@ -276,7 +290,7 @@ section{padding:100px 2.5rem}
 .cred-text strong{font-weight:500;color:var(--ink);display:block;margin-bottom:.2rem}
 
 /* ── CTA ── */
-#contact{background:var(--ink)}
+#contact{background:var(--section-dark, var(--ink))}
 #contact .section-label{color:#6FCF9A}
 #contact .section-title{color:var(--white)}
 #contact .section-sub{color:#8FA99F;max-width:600px}
@@ -292,6 +306,17 @@ section{padding:100px 2.5rem}
 .contact-row a{color:#6FCF9A;text-decoration:none;transition:color .2s}
 .contact-row a:hover{color:var(--white)}
 .contact-row svg{width:16px;height:16px;stroke:#6FCF9A;stroke-width:1.8;fill:none;flex-shrink:0}
+
+/* ── NAV TOGGLES ── */
+.nav-controls{display:flex;align-items:center;gap:.6rem}
+.theme-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--faint);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);transition:background .2s,color .2s;
+}
+.theme-btn:hover{background:var(--green-light);color:var(--green)}
+.theme-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
 
 /* ── FOOTER ── */
 footer{
@@ -349,10 +374,42 @@ footer{
 .field-wrap select.error,
 .field-wrap textarea.error { border-color: #e07070; }
 
-@media(max-width: 600px) {
+@media(max-width: 768px) {
   #contact-form > div[style*="grid-template-columns:1fr 1fr"] {
     grid-template-columns: 1fr !important;
   }
+  .contact-form-wrapper {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+    padding: 1.25rem !important;
+  }
+   .contact-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+} 
+
+
+/* ── DARK MODE: form fields ── */
+[data-theme="dark"] .field-wrap input,
+[data-theme="dark"] .field-wrap select,
+[data-theme="dark"] .field-wrap textarea {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.20);
+}
+[data-theme="dark"] .field-wrap input:focus,
+[data-theme="dark"] .field-wrap select:focus,
+[data-theme="dark"] .field-wrap textarea:focus {
+  background: rgba(255,255,255,.15);
+  border-color: var(--green);
+}
+/* ── DARK MODE: section title text fixes ── */
+[data-theme="dark"] #problems .section-title,
+[data-theme="dark"] #contact .section-title,
+[data-theme="dark"] .cta-offer h3,
+[data-theme="dark"] #contact-form h3 {
+  color: var(--ink);
 }
 </style>
 </head>
@@ -368,7 +425,13 @@ footer{
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Book a call</a>
+  <div class="nav-controls">
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <svg id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+    </button>
+    <a href="#contact" class="nav-cta">Book a call</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -378,13 +441,7 @@ footer{
       <div class="hero-tag">AI Automation Consultant</div>
       <h1>Less <em>repetition</em>.<br>More <em>leverage</em>.<br>Build with <em>AI</em>.</h1>
       <p class="hero-sub">I help small and medium businesses design and implement AI-powered automation workflows - so your team spends time on work that actually matters.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-          Book a call
-        </a>
-        <a href="#services" class="btn-secondary">See services →</a>
-      </div>
+      
     </div>
     <div class="hero-card">
       <div class="profile-head">
@@ -412,6 +469,13 @@ footer{
         <span class="tool-pill">Prompt Engineering</span>
       </div>
     </div>
+    <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          Book a call
+        </a>
+        <a href="#services" class="btn-secondary">See services →</a>
+      </div>
   </div>
 </section>
 
@@ -679,13 +743,13 @@ footer{
 <section id="contact">
   <div class="section-inner fade-in">
     <div class="section-label">Let's talk</div>
-    <h2 class="section-title">Not sure if automation will help?<br>That's exactly what we will find out.</h2>
-    <p class="section-sub">A free 30-minute discovery call to understand your situation and be direct about whether — and where — automation would actually move the needle for your business.</p>
+    <h2 class="section-title">We'll identify where automation <br>can actually save you time and money.</h2>
+    <p class="section-sub">A free 30-minute discovery call to map your current workflows and spot real opportunities.</p>
 
     <div class="cta-box" style="flex-direction:column;align-items:stretch;gap:2.5rem">
 
       <!-- Contact details row -->
-      <div class="contact-details" style="flex-direction:row;flex-wrap:wrap;gap:1.5rem">
+      <div class="contact-details" style="flex-direction:column;flex-wrap:wrap;gap:1.5rem">
         <div class="contact-row">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <a href="mailto:madalin.stroe@outlook.com">madalin.stroe@outlook.com</a>
@@ -705,7 +769,7 @@ footer{
       </div>
 
       <!-- Contact Form -->
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2.5rem">
+       <div class="contact-form-wrapper" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2.5rem">
         <h3 style="font-size:1.3rem;font-weight:300;color:#fff;letter-spacing:-.02em;margin-bottom:.4rem">Send a message</h3>
         <p style="font-size:.88rem;color:#8FA99F;margin-bottom:2rem;font-weight:300">I'll get back within 24 hours.</p>
 
@@ -714,18 +778,18 @@ footer{
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
             <div class="field-wrap">
               <label for="cf-name">Your name <span style="color:#6FCF9A">*</span></label>
-              <input type="text" id="cf-name" name="name" placeholder="Andrei Ionescu" required>
+              <input type="text" id="cf-name" name="name" placeholder="Your name" required>
             </div>
             <div class="field-wrap">
               <label for="cf-email">Your email <span style="color:#6FCF9A">*</span></label>
-              <input type="email" id="cf-email" name="email" placeholder="andrei@company.com" required>
+              <input type="email" id="cf-email" name="email" placeholder="Your email" required>
             </div>
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
             <div class="field-wrap">
               <label for="cf-company">Company / Website</label>
-              <input type="text" id="cf-company" name="company" placeholder="Acme SRL (optional)">
+              <input type="text" id="cf-company" name="company" placeholder="(optional)">
             </div>
             <div class="field-wrap">
               <label for="cf-service">I'm interested in</label>
@@ -765,6 +829,30 @@ footer{
 <footer>
   <p>© 2026 Mădălin Stroe · AI Automation Consultant · Brașov, România</p>
 </footer>
+
+<script> 
+
+
+/* ── DARK MODE ── */
+const themeBtn  = document.getElementById('theme-toggle');
+const iconSun   = document.getElementById('icon-sun');
+const iconMoon  = document.getElementById('icon-moon');
+
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  iconSun.style.display  = dark ? 'none'  : '';
+  iconMoon.style.display = dark ? ''      : 'none';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+
+themeBtn.addEventListener('click', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+});
+
+// Restore saved theme (fallback: system preference)
+const savedTheme = localStorage.getItem('theme');
+applyTheme(savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+</script>
 
 <script>
 const obs = new IntersectionObserver(entries => {
