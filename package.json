@@ -1,0 +1,31 @@
+{
+  "name": "landing-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:all": "playwright test --project=chromium --project=firefox --project=webkit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mst1923/landing-page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mst1923/landing-page/issues"
+  },
+  "homepage": "https://github.com/mst1923/landing-page#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

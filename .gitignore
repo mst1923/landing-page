@@ -4,3 +4,19 @@
 !.dev.vars.example
 .env*
 !.env.example
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+node_modules/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
