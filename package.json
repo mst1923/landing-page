@@ -1,8 +1,7 @@
 {
-  "name": "landing-page",
+  "name": "landing-page-tests",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Automated testing for landing page using Playwright",
   "scripts": {
     "test": "playwright test",
     "test:debug": "playwright test --debug",
@@ -13,19 +12,14 @@
     "test:webkit": "playwright test --project=webkit",
     "test:all": "playwright test --project=chromium --project=firefox --project=webkit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mst1923/landing-page.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/mst1923/landing-page/issues"
-  },
-  "homepage": "https://github.com/mst1923/landing-page#readme",
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e"
+  ],
+  "author": "mst1923",
+  "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.60.0"
+    "@playwright/test": "^1.40.0"
   }
 }

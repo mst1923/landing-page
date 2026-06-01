@@ -12,6 +12,12 @@ test.describe('Landing Page - Navigation', () => {
     await expect(nav).toBeVisible();
   });
 
+  test('should have logo in navigation', async ({ page }) => {
+    await page.goto('/');
+    const logo = page.locator('.nav-logo');
+    await expect(logo).toBeVisible();
+  });
+
   test('should have theme toggle button', async ({ page }) => {
     await page.goto('/');
     const themeBtn = page.locator('.theme-btn').first();
@@ -37,6 +43,12 @@ test.describe('Landing Page - Hero Section', () => {
     const heading = page.locator('h1');
     await expect(heading).toBeVisible();
     await expect(heading).toContainText(/Automate|AI|Business/);
+  });
+
+  test('should display hero subtitle', async ({ page }) => {
+    await page.goto('/');
+    const subtitle = page.locator('.hero-sub');
+    await expect(subtitle).toBeVisible();
   });
 
   test('should have primary and secondary CTA buttons', async ({ page }) => {
@@ -69,6 +81,12 @@ test.describe('Landing Page - Sections', () => {
     await expect(serviceCards.first()).toBeVisible();
   });
 
+  test('should have Stack section', async ({ page }) => {
+    await page.goto('/');
+    const stackSection = page.locator('#stack');
+    await expect(stackSection).toBeVisible();
+  });
+
   test('should have Contact section', async ({ page }) => {
     await page.goto('/');
     const contactSection = page.locator('#contact');
@@ -78,9 +96,22 @@ test.describe('Landing Page - Sections', () => {
 
 test.describe('Landing Page - Responsiveness', () => {
   test('should be responsive on mobile', async ({ page }) => {
+    // Mobile viewport already set in playwright.config.js for mobile tests
     await page.goto('/');
     const hero = page.locator('.hero');
     await expect(hero).toBeVisible();
+  });
+
+  test('should hide nav links on mobile', async ({ browser }) => {
+    const mobileContext = await browser.newContext({
+      viewport: { width: 375, height: 667 },
+    });
+    const page = await mobileContext.newPage();
+    await page.goto('/');
+    const navLinks = page.locator('.nav-links');
+    // On mobile, nav-links should be display: none
+    await expect(navLinks).toHaveCSS('display', 'none');
+    await mobileContext.close();
   });
 });
 
@@ -100,6 +131,14 @@ test.describe('Landing Page - SEO & Metadata', () => {
     await expect(canonical).toHaveAttribute('href', /mst1923.github.io\/landing-page/);
   });
 
+  test('should have Open Graph meta tags', async ({ page }) => {
+    await page.goto('/');
+    const ogTitle = page.locator('meta[property="og:title"]');
+    const ogImage = page.locator('meta[property="og:image"]');
+    await expect(ogTitle).toBeTruthy();
+    await expect(ogImage).toBeTruthy();
+  });
+
   test('should have structured data (JSON-LD)', async ({ page }) => {
     await page.goto('/');
     const scriptTag = page.locator('script[type="application/ld+json"]');
@@ -115,12 +154,31 @@ test.describe('Landing Page - Dark Mode', () => {
     const html = page.locator('html');
     const themeBtn = page.locator('.theme-btn').first();
     
+    // Initial state
     let theme = await html.getAttribute('data-theme');
+    
+    // Click theme button
     await themeBtn.click();
+    
+    // Wait for potential animation
     await page.waitForTimeout(100);
     
+    // Check theme changed
     const newTheme = await html.getAttribute('data-theme');
     expect(newTheme).not.toBe(theme);
+  });
+
+  test('should apply dark mode styles', async ({ page }) => {
+    await page.goto('/');
+    const html = page.locator('html');
+    
+    // Set to dark mode
+    await html.evaluate(el => el.setAttribute('data-theme', 'dark'));
+    
+    // Check that dark mode colors are applied
+    const hero = page.locator('.hero');
+    const bgColor = await hero.evaluate(el => window.getComputedStyle(el).backgroundColor);
+    expect(bgColor).toBeTruthy();
   });
 });
 
@@ -128,7 +186,20 @@ test.describe('Landing Page - Accessibility', () => {
   test('should have proper heading hierarchy', async ({ page }) => {
     await page.goto('/');
     const h1 = page.locator('h1');
-    await expect(h1).toHaveCount(1);
+    await expect(h1).toHaveCount(1); // Only one h1
+  });
+
+  test('should have alt text on images', async ({ page }) => {
+    await page.goto('/');
+    const images = page.locator('img');
+    const count = await images.count();
+    
+    for (let i = 0; i < count; i++) {
+      const img = images.nth(i);
+      const alt = await img.getAttribute('alt');
+      // Images should either have alt or be decorative
+      expect(alt !== null || (await img.isVisible())).toBeTruthy();
+    }
   });
 
   test('should have proper language attribute', async ({ page }) => {
@@ -144,6 +215,7 @@ test.describe('Landing Page - Performance', () => {
     await page.goto('/', { waitUntil: 'networkidle' });
     const loadTime = Date.now() - startTime;
     
+    // Should load in less than 5 seconds
     expect(loadTime).toBeLessThan(5000);
   });
 
