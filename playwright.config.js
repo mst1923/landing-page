@@ -23,11 +23,11 @@ module.exports = defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://mst1923.github.io/landing-page',
+    baseURL: 'https://mst1923.github.io/landing-page/',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     /* Screenshot on failure */
-    screenshot: 'only-on-failure',
+    screenshot: 'off',
   },
 
   /* Configure projects for major browsers */
@@ -36,6 +36,7 @@ module.exports = defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+/*
 
     {
       name: 'firefox',
@@ -46,8 +47,7 @@ module.exports = defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-
-    /* Test against mobile viewports. */
+    
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
@@ -56,6 +56,7 @@ module.exports = defineConfig({
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
     },
+    /*
   ],
 
   /* Run your local dev server before starting the tests */
