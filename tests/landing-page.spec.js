@@ -177,7 +177,6 @@ test.describe('Landing Page - Dark Mode', () => {
     await html.evaluate(el => el.setAttribute('data-theme', 'dark'));
     
     // Check that dark mode colors are applied
-    const hero = page.locator('.hero');
     const bgColor = await hero.evaluate(el => window.getComputedStyle(el).backgroundColor);
     expect(bgColor).toBeTruthy();
   });
@@ -206,7 +205,7 @@ test.describe('Landing Page - Accessibility', () => {
   test('should have proper language attribute', async ({ page }) => {
     await page.goto('', { waitUntil: 'networkidle' });
     const html = page.locator('html');
-    await expect(html).toHaveAttribute('lang', 'en', { timeout: 10000 });
+    await expect(html).toHaveAttribute('lang', 'en');
   });
 });
 
@@ -225,8 +224,7 @@ test.describe('Landing Page - Performance', () => {
     const viewport = page.locator('meta[name="viewport"]');
     await expect(viewport).toHaveAttribute(
       'content',
-      /width=device-width.*initial-scale=1/,
-      { timeout: 10000 }
+      /width=device-width.*initial-scale=1/
     );
   });
 });
