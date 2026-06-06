@@ -12,9 +12,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x]
     
     steps:
       - name: Checkout repository
@@ -63,6 +66,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: always()
+    permissions:
+      pull-requests: write
     steps:
       - name: Download all test reports
         uses: actions/download-artifact@v4
