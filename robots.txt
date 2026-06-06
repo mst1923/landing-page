@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mst1923.github.io/landing-page/sitemap.xml
+Sitemap: https://mst1923.github.io/landing-page/sitemap_index.xml
