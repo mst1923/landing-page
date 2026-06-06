@@ -30,7 +30,6 @@ module.exports = defineConfig({
     screenshot: 'off',
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
