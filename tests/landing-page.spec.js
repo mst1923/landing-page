@@ -170,6 +170,7 @@ test.describe('Landing Page - Dark Mode', () => {
 
   test('should apply dark mode styles', async ({ page }) => {
     await page.goto('', { waitUntil: 'networkidle' });
+    const hero = page.locator('.hero');
     await page.waitForSelector('.hero', { timeout: 10000 });
     const html = page.locator('html');
     
