@@ -9,6 +9,10 @@ test-results/
 playwright-report/
 playwright/.cache/
 node_modules/
+output/
+
+# Local design reference (not part of the deployed site)
+new_theme/
 
 # IDEs
 .vscode/
