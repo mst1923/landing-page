@@ -1,6 +1,5 @@
-# Mădălin Stroe — Personal Brand Landing Page
+# Mădălin Stroe — Personal Website
 
-Static personal-brand website for Mădălin Stroe, focused on QA automation, reliable AI workflows, and AI-assisted software delivery.
 
 ## Live site
 
@@ -34,30 +33,3 @@ Then open <http://127.0.0.1:4173/>.
 
 GitHub Pages publishes the static files from the repository root on the `main` branch. A push to `main` updates the primary site.
 
-If the existing Cloudflare Pages project remains connected to this GitHub repository, configure it with:
-
-- Production branch: `main`
-- Root directory: repository root
-- Framework preset: none
-- Build command: blank (or `exit 0`)
-- Build output directory: repository root (`.`)
-- Environment variables: none
-- Automatic production deployments: enabled
-
-Cloudflare Pages should then deploy the same commit automatically after it is pushed. The GitHub Pages address remains canonical unless the site is deliberately migrated to a custom domain later.
-
-## Release checks
-
-Before publishing:
-
-1. Preview the site locally and check desktop and mobile layouts in both themes.
-2. Confirm navigation, contact links, the mobile phone link, theme persistence, and keyboard access.
-3. Validate `robots.txt`, `sitemap.xml`, canonical metadata, JSON-LD, and the 1200×630 social image.
-4. Commit the release and push `main`.
-5. Verify the GitHub Pages deployment and, if connected, the Cloudflare Pages deployment.
-
-No browser-test CI workflow is used for this one-time rebuild.
-
-## Rollback
-
-If a production issue is found, revert the release commit and push the revert to `main`. GitHub Pages and a Git-connected Cloudflare Pages project will redeploy the previous version. Cloudflare Pages also retains prior deployments that can be promoted from its dashboard if needed.
